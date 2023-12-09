@@ -2,9 +2,9 @@
   "name": "exercice-api-todo-liste",
   "version": "1.0.0",
   "description": "exercice-revision",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon index.js"
   },
   "author": "Muriel",
   "license": "ISC",
