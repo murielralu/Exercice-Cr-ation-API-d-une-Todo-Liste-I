@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO "priority"
+INSERT INTO "importance"
     ("id", "name", "color")
 VALUES
     (1, 'Urgent', '# FF0000'),
@@ -8,15 +8,15 @@ VALUES
     (3, 'Pas important', '# 7FFF00');
 
 
-INSERT INTO "listTodo"
-    ("id", "title", "content", "priority_id")
+INSERT INTO "list"
+    ("id", "title", "content", "importance_id")
 VALUES
     (1,'Création animation soirée', 'sujets : Musique années 80- 2010 et faits extraordinaires', 2 ),
     (2, 'Décorer la maison', 'Faire le sapin de Noël', 1),
     (3, 'Nettoyage jardin', 'Broyer déchets haies', 3);
 
 
-SELECT setval('priority_id_seq', (SELECT MAX(id) from "priority"));
-SELECT setval('listTodo_id_seq', (SELECT MAX(id) from "listTodo"));
+SELECT setval('importance_id_seq', (SELECT MAX(id) from "importance"));
+SELECT setval('list_id_seq', (SELECT MAX(id) from "list"));
 
 COMMIT;
