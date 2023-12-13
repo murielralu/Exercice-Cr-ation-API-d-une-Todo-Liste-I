@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../sequelize-client.js');
+const sequelize = require('./sequelize-client.js');
 
 class Importance extends Sequelize.Model {}
 

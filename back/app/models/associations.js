@@ -11,7 +11,8 @@ List.belongsTo(Importance, {
 
 // réciproque : une priorité concerne plusieurs listes
 Importance.hasMany(List, {
-  as: "Lists"
+  foreignKey: "importance_id",
+  as: "lists"
 });
 
 module.exports = { List, Importance };

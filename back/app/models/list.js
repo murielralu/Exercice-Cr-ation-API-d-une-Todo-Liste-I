@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../sequelize-client.js');
+const sequelize = require('./sequelize-client.js');
 
 class List extends Sequelize.Model {}
 
 List.init({
 
   title: Sequelize.STRING,
-  content: Sequelize.STRING,
+  content: Sequelize.STRING
 },{
   sequelize,
-  tableName: "list"
+  tableName: "list",
 });
 
 module.exports = List;

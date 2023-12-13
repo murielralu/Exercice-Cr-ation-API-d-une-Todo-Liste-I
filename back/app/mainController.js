@@ -1,14 +1,14 @@
-const { List } = require("../models/list");
-const sanitizeHtml = require('sanitize-html');
+const { List } = require("./models/associations.js");
+
 
 const mainController = {
 
-  async getAlllists(req, res) {
+  async getAllLists(req, res) {
     try {
       const lists = await List.findAll(
-        { include: ["importance"] }
+        { include: 'importance' }
       );
-      res.json(lists);
+      res.status(200).json(lists);
     }
     catch (error) {
       console.error(error);
@@ -16,7 +16,7 @@ const mainController = {
     }
   },
 
-  async geListById(req, res) {
+  async getListById(req, res) {
     try {
       const listId = Number.parseInt(req.params.id, 10);
       if (isNaN(listId)) {
@@ -35,23 +35,21 @@ const mainController = {
   },
 
   async createList(req, res) {
+
     try {
-      const title = sanitizeHtml(req.body.title);
+      const title = req.body.title;
+      const importance = req.body.importance;
 
       if (!title || typeof title !== "string") {
         res.status(400).json({ error: "Missing or invalid body parameter: title" });
         return;
       }
-      const createdList = await List.create({
-        title: title,
-      });
-
+      const createdList = await List.create({ title, importance });
       res.status(201).json(createdList);
 
     } catch (error) {
       res.status(500).json({ message: 'Erreur serveur' });
     }
-
   },
 
   async updateList(req, res) {
