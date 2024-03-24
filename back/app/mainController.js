@@ -38,16 +38,19 @@ const mainController = {
 
     try {
       const title = req.body.title;
+      const content = req.body.content;
       const importance = req.body.importance;
 
       if (!title || typeof title !== "string") {
         res.status(400).json({ error: "Missing or invalid body parameter: title" });
         return;
       }
-      const createdList = await List.create({ title, importance });
+
+      const createdList = await List.create({ title, content, importance });
       res.status(201).json(createdList);
 
     } catch (error) {
+      console.error(error);
       res.status(500).json({ message: 'Erreur serveur' });
     }
   },
