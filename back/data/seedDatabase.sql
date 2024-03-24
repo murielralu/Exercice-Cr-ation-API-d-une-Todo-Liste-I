@@ -19,4 +19,11 @@ VALUES
 SELECT setval('importance_id_seq', (SELECT MAX(id) from "importance"));
 SELECT setval('list_id_seq', (SELECT MAX(id) from "list"));
 
+INSERT INTO "user"
+    ("id", "username", "password")
+VALUES
+    (1, 'Casimir', 'L_ile_aux_enfants$');
+
+
+
 COMMIT;

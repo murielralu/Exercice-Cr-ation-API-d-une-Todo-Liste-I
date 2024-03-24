@@ -1,4 +1,5 @@
-const { Sequelize, sequelize } = require('./sequelize-client');
+const Sequelize = require('sequelize');
+const sequelize = require('./sequelize-client.js');
 
 class User extends Sequelize.Model {}
 User.init({
