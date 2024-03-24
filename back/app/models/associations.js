@@ -1,6 +1,6 @@
 const List = require('./list');
 const Importance = require('./importance');
-
+const User = require('./user');
 
 // une liste a une priorité
 List.belongsTo(Importance, {
@@ -15,4 +15,16 @@ Importance.hasMany(List, {
   as: "lists"
 });
 
-module.exports = { List, Importance };
+// un utilisateur a plusieurs listes
+User.hasMany(List, {
+  foreignKey: "user_id",
+  as: "lists"
+});
+
+// réciproque : une liste appartient à un utilisateur
+List.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "user"
+});
+
+module.exports = { List, Importance, User };
