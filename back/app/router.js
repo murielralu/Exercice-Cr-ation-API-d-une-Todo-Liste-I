@@ -11,6 +11,8 @@ router.post("/login", mainController.loginUser);
 // accès aux listes ou à une liste particulière
 router.get("/lists", mainController.getAllLists);
 router.get("/list/:id", mainController.getListById);
+
+// Création, mise à jour et suppression d'une liste
 router.post("/list", mainController.createList);
 router.patch("/list/:id", mainController.updateList);
 router.delete("/list/:id", mainController.deleteList);
