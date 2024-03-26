@@ -3,9 +3,9 @@ POST http://localhost:3006/api/register
 Content-Type: application/json
 
 {
-    "id": 2,
-    "username": "Francois",
-    "password": "FrancoisCasimir$"
+    "id": 3,
+    "username": "Stéphane",
+    "password": "StéphaneCasimir$"
 }
 
 

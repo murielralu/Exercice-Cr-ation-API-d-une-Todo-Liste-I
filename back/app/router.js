@@ -1,21 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const mainController = require("./mainController.js");
+const listController = require("./controllers/listController.js");
+const userController= require ("./controllers/userController.js");
 
 // Inscription
-router.post("/register", mainController.registerUser);
+router.post("/register", userController.registerUser);
 
 // connexion
-router.post("/login", mainController.loginUser);
+router.post("/login", userController.loginUser);
 
 // accès aux listes ou à une liste particulière
-router.get("/lists", mainController.getAllLists);
-router.get("/list/:id", mainController.getListById);
+router.get("/lists", listController.getAllLists);
+router.get("/list/:id", listController.getListById);
 
 // Création, mise à jour et suppression d'une liste
-router.post("/list", mainController.createList);
-router.patch("/list/:id", mainController.updateList);
-router.delete("/list/:id", mainController.deleteList);
+router.post("/list", listController.createList);
+router.patch("/list/:id", listController.updateList);
+router.delete("/list/:id", listController.deleteList);
 
 
 module.exports = router;
