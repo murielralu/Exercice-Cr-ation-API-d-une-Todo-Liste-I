@@ -2,7 +2,7 @@
 BEGIN; 
 
 --Suppression des tables si elle existe lors de l'execution
-DROP TABLE IF EXISTS "list", "importance";
+DROP TABLE IF EXISTS "list", "importance", "user";
 
 
 

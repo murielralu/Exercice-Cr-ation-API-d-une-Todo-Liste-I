@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Import du module Express
 const express = require('express');
+const morgan = require('morgan');
 
 // Import du module CORS pour répondre aux requêtes d'origines différentes
 const cors = require('cors');
@@ -12,6 +13,9 @@ const router = require("./back/app/router");
 
 // Créeation d'une nouvelle application Express
 const app = express();
+
+
+app.use(morgan('combined'));
 
 // Port sur lequel le serveur écoute
 const port = 3006;
@@ -26,8 +30,8 @@ app.use(express.urlencoded({ extended: true }));
 // Ce middleware analyse les corps des requêtes JSON
 app.use(express.json());
 
-// Pour utilise le routeur 
-app.use(router);
+// Pour utilise le routeur qui est monté sur chemin spécifique: /api
+app.use('/api',router);
 
 
 // Démarrage du serveur qui écoute sur le port spécifié

@@ -4,16 +4,15 @@ const bcrypt = require('bcrypt'); // Import de bcrypt:hachage des mots de passe 
 const jwt = require('jsonwebtoken'); // Import de jsonwebtoken : gestion des tokens (sécurité)
 const Joi = require('joi'); // Import de  Joi pour la validation des données (sécurité)
 
-// Définissez un schéma de validation pour les données d'inscription et de connexion
+// On sécurise la validation du nom, du mot de passe permettant l'inscription et la connexion
 const schema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
-  password: Joi.string().pattern(/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{10,30}$/).required(),
+  password: Joi.string().pattern(/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z]).{10,30}$/).required(),
 
 });
 
 // (?=.*[A-Z]) il faut au moins une majuscule.
 // (?=.*[!@#$&*]) il faut au moins un caractère spécial.
-// (?=.*[0-9]) il faut au moins un chiffre.
 // (?=.*[a-z]) il faut au moins une minuscule.
 // .{10,30} il faut au moins entre 10 et 30 caractères.
 
@@ -191,11 +190,13 @@ const mainController = {
   async loginUser(req, res) {
     try { // bloc try pour gérer les erreurs
       // Utilisation de Joi pour valider les données d'entrée (req.body)
+      console.log('Fonction loginUser appelée');
       const result = schema.validate(req.body);
       const error = result.error; // si erreur, on récupère l'erreur
 
       // S'il y a erreur, on renvoie une erreur 400 avec le message d'erreur
       if (error) {
+        console.log('Erreur de validation:', error.details[0].message);
         // On récupère le 1er élément de l'objet "erreur" provenant de joi via la propriété "details" (qui est un tableau)
         return res.status(400).json({ error: error.details[0].message });
       }
@@ -204,6 +205,7 @@ const mainController = {
       const user = await User.findOne({ where: { username: req.body.username } });
       // Si l'utilisateur n'est pas trouvé, renvoie une erreur 400
       if (user == null) { // si user est null ou  undefined, renvoie une erreur 400 avec message
+        console.log('Utilisateur non trouvé');
         return res.status(400).send('Cannot find user');
       }
   
@@ -216,10 +218,12 @@ const mainController = {
         // alors on envoie le jeton
         res.json({ accessToken: accessToken });
       } else {
+        console.log('Les mots de passe ne correspondent pas');
         // Sinon on envoie un message d'erreur
         res.send('password do not match');
       }
     } catch (error) {
+      console.log('Erreur serveur:', error); 
       res.status(500).json({ message: 'Erreur serveur' });
     }
   }

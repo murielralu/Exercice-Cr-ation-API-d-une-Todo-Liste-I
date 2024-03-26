@@ -12,6 +12,9 @@ const sequelize = new Sequelize(process.env.PG_URL,{
     createdAt: 'created_at'
   }
 });
+sequelize.authenticate()
+  .then(() => console.log('La connexion a été établie avec succès.'))
+  .catch(error => console.error('Impossible de se connecter à la base de données:', error));
 
 //exporte l’instance de Sequelize pour que vous puissiez l’utiliser dans d’autres fichiers de votre application.
 module.exports = sequelize;

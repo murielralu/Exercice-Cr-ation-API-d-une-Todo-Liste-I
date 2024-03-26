@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=todoliste
+
+create_tables 2024-03-25T18:33:56Z M. Ralu <muriel.ralu@oclock.school> # creation des tables
